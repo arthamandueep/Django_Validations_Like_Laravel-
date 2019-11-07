@@ -1,4 +1,10 @@
 # Django_Validations_Like_Laravel-
+
+## How to use
+```bash
+  from xyz import validator
+```
+
 dejango validation which is similar to laravel rule validation
 ```bash
   #example required
