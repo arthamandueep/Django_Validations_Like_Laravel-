@@ -1,6 +1,7 @@
 # Django_Validations_Like_Laravel-
 dejango validation which is similar to laravel rule validation
 #example
+```bash
         rules={
             "entity":"required",
             "airport":"required",
@@ -10,3 +11,4 @@ dejango validation which is similar to laravel rule validation
             "repeat_time":"required"
         }
         validation = validator.validate(request.body,rules)
+```
