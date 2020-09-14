@@ -20,35 +20,10 @@ dejango validation which is similar to laravel rule validation
             response = [validation[1]]
             raise ValidationError(response)
 ```
-in above example required means it will accept null but variable should exist . required-imp means it will not accept nulls
-#example Unique
-```bash
-        rules={
-                "type":"required-imp|unique:Boxes,type",
-                "count":"required-imp|numeric",
-        }
-      validation = PayloadValidation.validate(request.data, rules)
-        if not validation[0]:
-            response = [validation[1]]
-            raise ValidationError(response)
-```
-
-#example Unique excluding given id
-```bash
-        rules={
-                "id":"required-imp|exists:Boxes",
-                "type":"required-imp|unique:Boxes,type:exclude,"+str(req_data['id']),
-                "count":"required-imp|numeric"
-        }
-        validation = PayloadValidation.validate(request.data, rules)
-        if not validation[0]:
-            response = [validation[1]]
-            raise ValidationError(response)
-```
 #example min and max values
 ```bash
         rules={
-                "mobile_number":"required-imp|unique:Sims|min:6000000000|max:9999999999",
+                "count":"required-imp|min:6000000000|max:9999999999",
         }
         validation = PayloadValidation.validate(request.data, rules)
         if not validation[0]:
@@ -60,9 +35,7 @@ here min and max are number ranges not lengths for strings
 #example min and max lengths
 ```bash
         rules={
-                "name":"required-imp|unique:DeviceType,DeviceType",
-                "equip_type":"required-imp|min-len:2|max-len:3",
-                "equipment_name":"required-imp"
+                "string_title":"required-imp|min-len:2|max-len:3",
         }
         validation = PayloadValidation.validate(request.data, rules)
         if not validation[0]:
@@ -79,5 +52,25 @@ here min and max are number ranges not lengths for strings
             response = [validation[1]]
             raise ValidationError(response)
 ```
-This is used check wheather item exstis in given values or not
 
+#example for Array validation
+```bash
+        rules={
+                "ids":"required|array"
+        }
+        validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
+```
+
+#example for Boolean validation
+```bash
+        rules={
+                "status":"required|bool"
+        }
+        validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
+```
