@@ -2,7 +2,7 @@
 
 ## How to use
 ```bash
-  from xyz import validator
+  from validator import PayloadValidation
 ```
 
 ## Validation examples
@@ -15,7 +15,10 @@ dejango validation which is similar to laravel rule validation
             "receiver_email":"required-imp",
             "repeat_time":"required"
         }
-        validation = validator.validate(request.body,rules)
+        validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
 ```
 in above example required means it will accept null but variable should exist . required-imp means it will not accept nulls
 #example Unique
@@ -24,7 +27,10 @@ in above example required means it will accept null but variable should exist . 
                 "type":"required-imp|unique:Boxes,type",
                 "count":"required-imp|numeric",
         }
-validation = validator.validate(request.body,rules)
+      validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
 ```
 
 #example Unique excluding given id
@@ -34,14 +40,20 @@ validation = validator.validate(request.body,rules)
                 "type":"required-imp|unique:Boxes,type:exclude,"+str(req_data['id']),
                 "count":"required-imp|numeric"
         }
-        validation = validator.validate(request.body,rules)
+        validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
 ```
 #example min and max values
 ```bash
         rules={
                 "mobile_number":"required-imp|unique:Sims|min:6000000000|max:9999999999",
         }
-        validation = validator.validate(request.body,rules)
+        validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
 ```
 here min and max are number ranges not lengths for strings
 
@@ -52,14 +64,20 @@ here min and max are number ranges not lengths for strings
                 "equip_type":"required-imp|min-len:2|max-len:3",
                 "equipment_name":"required-imp"
         }
-        validation = validator.validate(request.body,rules)
+        validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
 ```
 #example for IN
 ```bash
         rules={
                 "status":"required|in:['pending']"
         }
-        validation = validator.validate(request.body,rules)
+        validation = PayloadValidation.validate(request.data, rules)
+        if not validation[0]:
+            response = [validation[1]]
+            raise ValidationError(response)
 ```
 This is used check wheather item exstis in given values or not
 
