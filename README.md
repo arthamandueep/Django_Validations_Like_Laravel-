@@ -6,7 +6,7 @@
 ```
 
 ## Validation examples
-dejango validation which is similar to laravel rule validation
+django validation which is similar to laravel rule validation
 ```bash
   #example required
         rules={
